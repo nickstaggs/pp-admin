@@ -9,6 +9,10 @@ import routes from './router/index.js'
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 
+import 'vue-awesome/icons'
+import Icon from 'vue-awesome/components/Icon'
+Vue.component('v-icon', Icon)
+
 const router = new VueRouter({
   routes: routes,
   mode: 'history'
