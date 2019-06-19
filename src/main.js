@@ -14,8 +14,8 @@ import Icon from 'vue-awesome/components/Icon'
 Vue.component('v-icon', Icon)
 
 const router = new VueRouter({
-  routes: routes,
-  mode: 'history'
+  mode: 'history',
+  routes: routes
 })
 
 Vue.config.productionTip = false
