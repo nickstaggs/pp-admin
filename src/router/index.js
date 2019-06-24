@@ -6,7 +6,7 @@ import ResourceCards from '../components/ResourceCards.vue'
 export default 
 [
     { path: '/', component: LoginPage, name:'LoginPage' },
-    { path: '/dashboard', component: DashboardPage, name:'DashboardPage',
+    { path: '/dashboard', component: DashboardPage,
         children: [
             {
                 path: '',

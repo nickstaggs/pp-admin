@@ -9,7 +9,7 @@ export default {
     props: ['resourceName'],
     data() {
         return {
-            addUrl: `${this.resourceName}/add`
+            addUrl: `dashboard/${this.resourceName}/add`
         }
     },
     methods: {

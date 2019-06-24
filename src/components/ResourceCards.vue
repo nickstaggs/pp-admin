@@ -32,7 +32,7 @@ export default {
     methods: {
         getResources() {
             axios
-                .get(process.env.VUE_APP_BASEURL + this.resourceName)
+                .get(process.env.VUE_APP_BASEURL + this.resourceName, {withCredentials: true})
                 .then((response) => this.uniqueResources = response.data);
         },
         createDetailsUrl(resource, id) {

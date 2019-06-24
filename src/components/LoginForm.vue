@@ -39,18 +39,16 @@ export default {
   methods: {
     onSubmit() {
       axios
-        .post(process.env.VUE_APP_BASEURL + 'users', {username: this.form.username, password: this.form.password})
-        .then((resp) => {
-          this.loggedIn = resp.body;
+        .post(process.env.VUE_APP_BASEURL + 'users', {username: this.form.username, password: this.form.password}, {withCredentials: true})
+        .then((resp) => resp.data)
+        .then((isLoggedIn) => {
           this.form = {
             username: "",
             password: ""
           };
-          this.$bvToast.toast(`User logged in: ${this.loggedIn}`, {
-            title: 'Status',
-            autoHideDelay: 3000,
-            appendToast: true
-          })
+          if (isLoggedIn) {
+            this.$router.push('dashboard');
+          }
         })
         .catch((err) => {
           this.$bvToast.toast(`Oops something went wrong: ${err}`, {
