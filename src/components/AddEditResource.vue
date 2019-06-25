@@ -3,8 +3,8 @@
         <div v-for="(value, name) in resourceRep" v-bind:key="name">
             {{name}}:
             <div v-if="Array.isArray(value) && value.length > 0">
-                <select v-model="newRep[name]">
-                    <option v-for="option in value" v-bind:key="option" v-bind:value="option.id"> 
+                <select v-model="newRep[name]" >
+                    <option v-for="option in value" v-bind:key="option.name" v-bind:value="option.id"> 
                         {{ option.name }}
                     </option>
                 </select>
@@ -36,20 +36,24 @@ export default {
             this.newRep[fieldName] = this.$refs.file[0].files[0];
         },
         submit() {
-            let fd = new FormData();
-            Object.entries(this.newRep).forEach(([key, value]) => {
-                fd.append(key, value);
-            });
+            let axiosConfig = { withCredentials: true }
+            let data = this.newRep;
+
+            if (this.$refs.file !== undefined) {
+                axiosConfig.headers = {'Content-Type': 'multipart/form-data'};
+
+                let fd = new FormData();
+                Object.entries(this.newRep).forEach(([key, value]) => {
+                    fd.append(key, value);
+                });
+
+                data = fd;
+            }
             
             axios
                 .post(`${process.env.VUE_APP_BASEURL}${this.resourceName}`, 
-                    fd, 
-                    {
-                        withCredentials: true, 
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    }) 
+                    data, 
+                    axiosConfig) 
                 .then(resp => resp.data)
                 .then(isSuccess => {
                     if (isSuccess) {
