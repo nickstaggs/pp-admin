@@ -27,7 +27,8 @@ export default {
             tabs: [
                 { name: "files" },
                 { name: "blogposts" },
-                { name: "projects" }
+                { name: "projects" },
+                { name: "content" }
             ]
 		}
     },
